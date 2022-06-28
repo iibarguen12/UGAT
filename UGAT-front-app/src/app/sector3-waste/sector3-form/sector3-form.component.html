@@ -1,0 +1,156 @@
+            
+<form #sectorForm="ngForm" class="box">  
+    
+    <!--Header selectors-->
+    <div class="row" style="height: 70px !important; overflow: auto;"> 
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="city">City</label>
+            <select id="city" name="city" required ngModel class="form-control"
+            (ngModelChange)="onChangeCity($event)">
+                <option *ngFor="let goverment of governmentsCities" [value]="goverment.cityName">
+                    {{goverment.cityName}}
+                </option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="inventoryPeriod">Inventory Period</label>
+            <select id="inventoryPeriod" name="inventoryPeriod" required ngModel class="form-control">
+                <option *ngFor="let period of periodsByCity" [value]="period.inventoryPeriod">
+                    {{period.inventoryPeriod}}
+                </option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="subSector">Sub Sector</label>
+            <select name="subSector" required ngModel class="form-control"
+            (ngModelChange)="onChangeSector($event)">
+                <option value="Landfill">1-Landfill</option>
+                <option value="Incineration">2-Incineration</option>
+                <option value="Mechanical Biological treatment">3-Mechanical Biological treatment</option>
+                <option value="Waste Water">4-Waste Water</option>
+            </select>
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="scope">Scope</label>
+            <select id="scope" name="scope" required ngModel class="form-control"
+            (ngModelChange)="onChangeScope($event)">
+                <option *ngFor="let element of scopeElements" value="{{element.key}}">{{element.value}}</option>
+            </select>
+        </div>
+    </div>
+    <hr style="margin-bottom: 20px !important;"/>   
+    
+    <!--All scopes inputs-->         
+    <div class="row" style="height: 178px !important; overflow: auto;"
+    *ngIf="scopeAllInputs"> 
+        <!--Row 1-->
+        <div class="row center" 
+        *ngIf="subSectorAllInputs">
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="organic">Organic fraction</label>
+                <input type="number" min="0" step="100" name="organic" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="organicUnit">Unit</label>                        
+                <select name="organicUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>                        
+            </div>
+            
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">
+                <label for="paper">Paper</label>
+                <input type="number" min="0" step="100" name="paper" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="paperUnit">Unit</label>                        
+                <select name="paperUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">
+                <label for="plastic">Plastic</label>
+                <input type="number" min="0" step="100" name="plastic" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="plasticUnit">Unit</label>                        
+                <select name="plasticUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>                
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">
+                <label for="glass">Glass</label>
+                <input type="number" min="0" step="100" name="glass" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="glassUnit">Unit</label>                        
+                <select name="glassUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+        </div>
+        <!--Row 2-->
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px !important; margin-bottom: 5px !important;"
+            *ngIf="subSectorAllInputs">
+                <label for="gardening">Gardening waste<br/>(including wood)</label>
+                <input type="number" min="0" step="100" name="gardening" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="gardeningUnit">Unit</label>                        
+                <select name="gardeningUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px !important; margin-bottom: 5px !important;"
+            *ngIf="subSectorAllInputs">
+                <label for="inert">Inert Material<br/>(Construction waste)</label>                    
+                <input type="number" min="0" step="100" name="inert" ngModel class="form-control" style=" width: 100px;">
+            
+                <label for="inertUnit">Unit</label>                        
+                <select name="inertUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div> 
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px !important; margin-bottom: 5px !important;">
+                <label for="water">Waste Water<br/><span class="invisible">empty</span></label>                    
+                <input type="number" min="0" step="100" name="water" ngModel class="form-control" style=" width: 100px;">
+            
+                <label for="waterUnit">Unit</label>                        
+                <select name="waterUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+        </div>               
+    </div>            
+
+    <hr style="margin-top: 0px !important;"/>          
+    <div class="field">                
+        <button type="button" (click)="onSubmit(sectorForm)" [disabled]="submitOff" class="btn btn-primary">Save changes</button>
+    </div>            
+</form>                      

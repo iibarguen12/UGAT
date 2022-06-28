@@ -1,0 +1,47 @@
+
+<br/>
+<div class="width80 center">
+  <!--Tabs Headres-->
+  <div class="tabs is-boxed is-centered">
+    <ul class="nav">
+      <li class="nav-item" *ngFor="let sector of sectors" [ngClass]="{'is-active':selectedSector===sector}">
+        <a class="nav-link" (click)="openSector(sector)" >
+          <span>{{sector}}</span>          
+        </a>
+      </li>
+    </ul>        
+  </div>
+  
+  <!--Tabs Contents-->
+  <!--Stationary Energy-->
+  <ng-container *ngIf="selectedSector === 'Stationary Energy'">    
+    <app-sector1-energy></app-sector1-energy>
+  </ng-container>
+  
+  <!--Transportation-->
+  <ng-container *ngIf="selectedSector === 'Transportation'">        
+    <app-sector2-transportation></app-sector2-transportation>
+  </ng-container>
+  
+  <!--Waste-->
+  <ng-container *ngIf="selectedSector === 'Waste'">        
+    <app-sector3-waste></app-sector3-waste>
+  </ng-container>
+  
+  <!--IPPU-->
+  <ng-container *ngIf="selectedSector === 'IPPU'">    
+    <app-sector4-ippu></app-sector4-ippu>
+  </ng-container>
+  
+  <!--AFOLU-->
+  <ng-container *ngIf="selectedSector === 'AFOLU'">        
+    <app-sector5-afolu></app-sector5-afolu>
+  </ng-container>
+
+  <!--Totals-->
+  <ng-container *ngIf="selectedSector === 'Totals'">        
+    <app-totals></app-totals>
+  </ng-container>
+  
+</div>
+

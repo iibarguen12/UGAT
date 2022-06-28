@@ -1,0 +1,34 @@
+<section>
+    <div>                               
+        <div class="tabs is-boxed">
+            <ul class="nav">
+                <li class="nav-item" *ngFor="let option of options" [ngClass]="{'is-active':selectedOption===option}">
+                <a class="nav-link" (click)="openOption(option)" >
+                    <span>{{option}}</span>          
+                </a>                
+                </li> 
+                <li style="width: 72% !important;"></li> 
+                <li style="float: right;">
+                    <span class="icon is-small marginright10"><i class="fa fa-lg fa-tree" aria-hidden="true"></i></span>
+                    <span class="icon is-small marginright10"><i class="fa fa-lg fa-dog" aria-hidden="true"></i></span>
+                    <span class="icon is-small marginright10"><i class="fa fa-lg fa-horse" aria-hidden="true"></i></span>
+                    <span class="icon is-small marginright10"><i class="fa fa-lg fa-crow" aria-hidden="true"></i></span>
+                    <span class="icon is-small marginright10"><i class="fa fa-lg fa-paw" aria-hidden="true"></i></span>
+                </li>                               
+            </ul>                                                      
+        </div> 
+             
+    </div> 
+    <br/>
+    <!--Div option 1 to enter new the data--> 
+    <div class="container"
+    *ngIf="selectedOption === 'Add Info'">                     
+        <app-sector5-form></app-sector5-form>                     
+    </div>
+
+    <!--Div option 2 to show the data-->
+    <div class="container"
+    *ngIf="selectedOption === 'Show Info'">        
+        <app-sector5-info></app-sector5-info> 
+    </div> 
+</section>

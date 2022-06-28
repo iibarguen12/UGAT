@@ -1,0 +1,443 @@
+            
+<form #sectorForm="ngForm" class="box">  
+    
+    <!--Header selectors-->
+    <div class="row" style="height: 70px !important; overflow: auto;"> 
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="city">City</label>
+            <select id="city" name="city" required ngModel class="form-control"
+            (ngModelChange)="onChangeCity($event)">
+                <option *ngFor="let goverment of governmentsCities" [value]="goverment.cityName">
+                    {{goverment.cityName}}
+                </option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="inventoryPeriod">Inventory Period</label>
+            <select id="inventoryPeriod" name="inventoryPeriod" required ngModel class="form-control">
+                <option *ngFor="let period of periodsByCity" [value]="period.inventoryPeriod">
+                    {{period.inventoryPeriod}}
+                </option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="subSector">Sub Sector</label>
+            <select id="subSector" name="subSector" required ngModel class="form-control"
+            (ngModelChange)="onChangeSector($event)">
+                <option value="Industrial Production">1-Industrial Production</option>
+                <option value="Product Use">2-Product Use</option>
+            </select>
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="scope">Scope</label>
+            <select id="scope" name="scope" required ngModel class="form-control"
+            (ngModelChange)="onChangeScope($event)">
+                <option *ngFor="let element of scopeElements" value="{{element.key}}">{{element.value}}</option>
+            </select>
+        </div>
+    </div>
+    <hr style="margin-bottom: 20px !important;"/>   
+    
+    <!--Sector 1 inputs-->         
+    <div class="row" style="height: 178px !important; overflow: auto;"
+    *ngIf="sector1AllInputs"> 
+        <!--Sector 1 Row 1-->
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px !important; margin-bottom: 5px !important;">                        
+                <label for="clinker">Clinker production<br/>from Cement</label>
+                <input type="number" min="0" step="100" name="clinker" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="clinkerUnit">Unit</label>                        
+                <select name="clinkerUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>                            
+                </select>                        
+            </div>
+            
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px !important; margin-bottom: 5px !important;">
+                <label for="lime">Emissions from<br/>Lime production</label>
+                <input type="number" min="0" step="100" name="lime" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="limeUnit">Unit</label>                        
+                <select name="limeUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px !important; margin-bottom: 5px !important;">
+                <label for="glass">Emissions from<br/>Glass production</label>
+                <input type="number" min="0" step="100" name="glass" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="glassUnit">Unit</label>                        
+                <select name="glassUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>                
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px !important; margin-bottom: 5px !important;">
+                <label for="ammonia">Ammonia<br/><span class="invisible">empty</span></label>
+                <input type="number" min="0" step="100" name="ammonia" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="ammoniaUnit">Unit</label>                        
+                <select name="ammoniaUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="othersAcid">Acprolactam, Gyoxal<br/>and Glyoxylic acid</label>
+                <input type="number" min="0" step="100" name="othersAcid" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="othersAcidUnit">Unit</label>                        
+                <select name="othersAcidUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>                    
+            
+        </div>
+        <!--Sector 1 Row 2-->
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">
+                <label for="adipicAcid">Adipic Acid</label>
+                <input type="number" min="0" step="100" name="adipicAcid" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="adipicAcidUnit">Unit</label>                        
+                <select name="adipicAcidUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">
+                <label for="nitricAcid">Nitric Acid</label>
+                <input type="number" min="0" step="100" name="nitricAcid" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="nitricAcidUnit">Unit</label>                        
+                <select name="nitricAcidUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">
+                <label for="carbide">Carbide</label>
+                <input type="number" min="0" step="100" name="carbide" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="carbideUnit">Unit</label>                        
+                <select name="carbideUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">
+                <label for="titanium">Titanium Dioxide</label>
+                <input type="number" min="0" step="100" name="titanium" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="titaniumUnit">Unit</label>                        
+                <select name="titaniumUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div> 
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="soda">Soda Ash</label>
+                <input type="number" min="0" step="100" name="soda" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="sodaUnit">Unit</label>                        
+                <select name="sodaUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>                            
+                </select>                        
+            </div>                                          
+            
+        </div>
+        <!--Sector 1 Row 3-->                
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">                        
+                <label for="metallurgical">Metallurgical<br/>Coke production</label>
+                <input type="number" min="0" step="100" name="metallurgical" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="metallurgicalUnit">Unit</label>                        
+                <select name="metallurgicalUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>                            
+                </select>                        
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">                        
+                <label for="iron">Iron and<br/>Steel production</label>
+                <input type="number" min="0" step="100" name="iron" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="ironUnit">Unit</label>                        
+                <select name="ironUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>                            
+                </select>                        
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="ferroalloy">Ferroalloy<br/>production</label>
+                <input type="number" min="0" step="100" name="ferroalloy" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="ferroalloyUnit">Unit</label>                        
+                <select name="ferroalloyUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="aluminum">Aluminum<br/>production</label>
+                <input type="number" min="0" step="100" name="aluminum" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="aluminumUnit">Unit</label>                        
+                <select name="aluminumUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="magnesium">Magnesium<br/>production</label>
+                <input type="number" min="0" step="100" name="magnesium" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="magnesiumUnit">Unit</label>                        
+                <select name="magnesiumUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>                                    
+        </div>
+        <!--Sector 1 Row 4-->                
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="lead">Lead<br/>production</label>
+                <input type="number" min="0" step="100" name="lead" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="leadUnit">Unit</label>                        
+                <select name="leadUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="zinc">Zinc<br/>production</label>
+                <input type="number" min="0" step="100" name="zinc" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="zincUnit">Unit</label>                        
+                <select name="zincUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="other">
+                    Other
+                    <input type="text" name="otherDescription" ngModel class="form-control otherInput">
+                    <br/> <span class="invisible">empty</span>
+                </label>                    
+                <input type="number" min="0" step="100" name="other" ngModel class="form-control" style=" width: 100px;">
+            
+                <label for="otherUnit">Unit</label>                        
+                <select name="otherUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+        </div>
+    </div> 
+    
+    <!--Sector 2 inputs-->         
+    <div class="row" style="height: 178px !important; overflow: auto;"
+    *ngIf="sector2AllInputs"> 
+        <!--Sector 2 Row 1-->
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">                        
+                <label for="lubricants">Lubricants <br/> <span class="invisible">empty</span></label>
+                <input type="number" min="0" step="100" name="lubricants" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="lubricantsUnit">Unit</label>                        
+                <select name="lubricantsUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>                            
+                </select>                        
+            </div>
+            
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="parafin">Parafin Wax <br/> <span class="invisible">empty</span></label>
+                <input type="number" min="0" step="100" name="parafin" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="parafinUnit">Unit</label>                        
+                <select name="parafinUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="petroleum">Bitumen, road oil and<br/>other petroleum diluents</label>
+                <input type="number" min="0" step="100" name="petroleum" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="petroleumUnit">Unit</label>                        
+                <select name="petroleumUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>                
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="aromatics">White spirit, kerosene,<br/>some aromatics</label>
+                <input type="number" min="0" step="100" name="aromatics" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="aromaticsUnit">Unit</label>                        
+                <select name="aromaticsUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>                                       
+            
+        </div>
+        <!--Sector 2 Row 2-->
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="fluids">Head transfer<br/>fluids</label>
+                <input type="number" min="0" step="100" name="fluids" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="fluidsUnit">Unit</label>                        
+                <select name="fluidsUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="pfc">PFC<br/>Perfluorocarbonates</label>
+                <input type="number" min="0" step="100" name="pfc" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="pfcUnit">Unit</label>                        
+                <select name="pfcUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="hfc">HFC<br/>Hidrofluorocarbonates</label>
+                <input type="number" min="0" step="100" name="hfc" ngModel class="form-control" style=" width: 100px;">                        
+            
+                <label for="hfcUnit">Unit</label>                        
+                <select name="hfcUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 160px  !important; margin-bottom: 5px !important;">
+                <label for="other2">
+                    Other
+                    <input type="text" name="other2Description" ngModel class="form-control otherInput">
+                    <br/> <span class="invisible">empty</span>
+                </label>                    
+                <input type="number" min="0" step="100" name="other2" ngModel class="form-control" style=" width: 100px;">
+            
+                <label for="other2Unit">Unit</label>                        
+                <select name="other2Unit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="M3">M3</option>
+                    <option value="Liters">Liters</option>
+                    <option value="Gallons">Gallons</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Tons">Tons</option>
+                </select>
+            </div>                                                             
+            
+        </div>                
+    </div> 
+
+    <hr style="margin-top: 0px !important;"/>          
+    <div class="field">                
+        <button type="button" (click)="onSubmit(sectorForm)" [disabled]="submitOff" class="btn btn-primary">Save changes</button>
+    </div>            
+</form>                      

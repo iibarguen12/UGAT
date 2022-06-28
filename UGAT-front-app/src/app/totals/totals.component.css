@@ -1,0 +1,58 @@
+@import "../../../node_modules/bulma/css/bulma.css";
+hr{
+  margin-top: 0px !important;
+  margin-bottom: 15px !important;
+}
+
+.form-control{
+  height: 1.5rem;
+  padding: 0px;
+  font-size: 13px;
+}
+
+.error {
+  color: red;
+  font-size: small;
+}
+
+.otherInput{
+  width: 85px;
+  float: right;
+  height: 20px;
+  margin-left: 5px;
+  border: none;
+  border-bottom: groove;
+  border-radius: unset;
+}
+
+thead th{
+  font-weight: normal;
+  font-size: 11px !important;
+  background-color: aliceblue;
+  color: gray !important;
+  cursor: auto !important;
+}
+
+tbody td{  
+  font-size: 11px !important;
+  cursor: auto !important;
+  border:none !important;
+}
+
+tbody tr{  
+  border:none !important;
+}
+
+table {
+  height: 100px;
+  overflow-y: scroll;
+  border-spacing: 0px !important;
+  border-collapse: collapse !important;
+}
+
+.title{
+  font-weight: normal !important;
+  font-size: 11px !important;
+  background-color: aliceblue !important;
+  color: gray !important;
+}

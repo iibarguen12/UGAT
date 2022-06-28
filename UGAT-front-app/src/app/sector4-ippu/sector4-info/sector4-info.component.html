@@ -1,0 +1,225 @@
+<div class="box">
+    <!--Header selectors-->
+    <div class="row" style="height: 70px !important; overflow: auto;"> 
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="city">City</label>
+            <select name="city" required [(ngModel)]="selectedCity" class="form-control"
+            (ngModelChange)="onChangeCity($event)">
+                <option value="All">Select All</option>                
+                <option *ngFor="let goverment of governmentsCities" [value]="goverment.cityName">
+                    {{goverment.cityName}}
+                </option>   
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="inventoryPeriod">Inventory Period</label>
+            <select name="inventoryPeriod" required [(ngModel)]="selectedInventoryPeriod" class="form-control"
+            (ngModelChange)="onChangePeriod($event)">
+                <option value="All">Select All</option>                
+                
+                <option value="01.Jan - 31.Dec 2016">01.Jan - 31.Dec 2016</option>
+                <option value="01.Jan - 31.Dec 2017">01.Jan - 31.Dec 2017</option>
+                <option value="01.Jan - 31.Dec 2018">01.Jan - 31.Dec 2018</option>
+                <option value="01.Jan - 31.Dec 2019">01.Jan - 31.Dec 2019</option>
+                <option value="01.Jan - 31.Dec 2020">01.Jan - 31.Dec 2020</option>
+                <option value="01.Jan - 31.Dec 2021">01.Jan - 31.Dec 2021</option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="subSector">Sub Sector</label>
+            <select id="subSector" name="subSector" required [(ngModel)]="selectedSubSector" class="form-control"
+            (ngModelChange)="onChangeSector($event)">                
+                <option value="Industrial Production">1-Industrial Production</option>
+                <option value="Product Use">2-Product Use</option>
+            </select>
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="scope">Scope</label>
+            <select id="scope" name="scope" required [(ngModel)]="selectedScope" class="form-control"
+            (ngModelChange)="onChangeScope($event)">                  
+                <option value="Industry Type">1-Industry Type</option>
+            </select>
+        </div>
+    </div>
+    <hr style="margin-bottom: 5px !important;"/>
+
+    <!--Table information for SubSector 1-->
+    <div class="tab-pane fade show active table200body" id="sectorRecords"
+    *ngIf="showResults1" style="height: 250px;">            
+        <table class="table table-hover">
+        <thead class="table-borderless">
+            <tr class="text-center">
+            <th (click)="sortFunction('city', booleanSort)">City</th>
+            <th (click)="sortFunction('inventoryPeriod', booleanSort)">Period</th>
+            <th (click)="sortFunction('subSector', booleanSort)">Sub Sector</th>
+            <th (click)="sortFunction('scope', booleanSort)">Scope</th>
+            <th (click)="sortFunction('clinker', booleanSort)">Clinker<br>in Tons</th>
+            <th (click)="sortFunction('lime', booleanSort)">Lime<br>in Tons</th>
+            <th (click)="sortFunction('glass', booleanSort)">Glass<br>in Tons</th>
+            <th (click)="sortFunction('ammonia', booleanSort)">Ammonia<br>in Tons</th>
+            <th (click)="sortFunction('nitricAcid', booleanSort)">NitricAcid<br>in Tons</th>
+            <th (click)="sortFunction('adipicAcid', booleanSort)">AdipicAcid<br>in Tons</th>
+            <th (click)="sortFunction('othersAcid', booleanSort)">OthersAcid<br>in Tons</th>
+            <th (click)="sortFunction('carbide', booleanSort)">Carbide<br>in Tons</th>
+            <th (click)="sortFunction('titanium', booleanSort)">Titanium<br>in Tons</th>
+            <th (click)="sortFunction('soda', booleanSort)">Soda<br>in Tons</th>
+            <th (click)="sortFunction('metallurgical', booleanSort)">Metallurgical<br>in Tons</th>
+            <th (click)="sortFunction('iron', booleanSort)">Iron<br>in Tons</th>
+            <th (click)="sortFunction('ferroalloy', booleanSort)">Ferroalloy<br>in Tons</th>
+            <th (click)="sortFunction('aluminum', booleanSort)">Aluminum<br>in Tons</th>
+            <th (click)="sortFunction('magnesium', booleanSort)">Magnesium<br>in Tons</th>
+            <th (click)="sortFunction('lead', booleanSort)">Lead<br>in Tons</th>
+            <th (click)="sortFunction('zinc', booleanSort)">Zinc<br>in Tons</th>
+            <th (click)="sortFunction('otherDescription', booleanSort)">Other<br>Description</th>        
+            <th (click)="sortFunction('other', booleanSort)">Other<br>in Tons</th>            
+            <th>
+                <div class="btn-group float-right">
+                    <button type="button" (click)="getallSector4Records(true)" class="btn btn-info">
+                    <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i><i *ngIf="!refreshing" class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let sectorRecord of filteredSector4Records">
+            <tr class="text-center">  
+                <th>{{sectorRecord?.city}}</th>
+                <th>{{sectorRecord?.inventoryPeriod.split(" ").pop()}}</th>   
+                <td >
+                    <ng-container *ngIf="sectorRecord.subSector == 'Industrial Production'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.subSector == 'Product Use'">
+                        2
+                    </ng-container>              
+                </td>
+                <td >                    
+                    1
+                </td>
+                <td>{{sectorRecord?.clinker}}</td>           
+                <td>{{sectorRecord?.lime}}</td> 
+                <td>{{sectorRecord?.glass}}</td> 
+                <td>{{sectorRecord?.ammonia}}</td> 
+                <td>{{sectorRecord?.nitricAcid}}</td> 
+                <td>{{sectorRecord?.adipicAcid}}</td> 
+                <td>{{sectorRecord?.othersAcid}}</td> 
+                <td>{{sectorRecord?.carbide}}</td> 
+                <td>{{sectorRecord?.titanium}}</td> 
+                <td>{{sectorRecord?.soda}}</td> 
+                <td>{{sectorRecord?.metallurgical}}</td> 
+                <td>{{sectorRecord?.iron}}</td> 
+                <td>{{sectorRecord?.ferroalloy}}</td> 
+                <td>{{sectorRecord?.aluminum}}</td> 
+                <td>{{sectorRecord?.magnesium}}</td> 
+                <td>{{sectorRecord?.leadProduction}}</td> 
+                <td>{{sectorRecord?.zinc}}</td> 
+                <td>{{sectorRecord?.otherDescription}}</td>
+                <td>{{sectorRecord?.other}}</td>                                  
+                <td class="">                    
+                    <button class="btn btn-outline-danger" (click)="onDeleteSector4(sectorRecord?.id)"><i class="fas fa-trash"></i></button>                    
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th>Totals in Tons</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{sumClinker}}</th>           
+            <th>{{sumLime}}</th> 
+            <th>{{sumGlass}}</th> 
+            <th>{{sumAmmonia}}</th> 
+            <th>{{sumNitricAcid}}</th> 
+            <th>{{sumAdipicAcid}}</th> 
+            <th>{{sumOthersAcid}}</th> 
+            <th>{{sumCarbide}}</th> 
+            <th>{{sumTitanium}}</th> 
+            <th>{{sumSoda}}</th> 
+            <th>{{sumMetallurgical}}</th> 
+            <th>{{sumIron}}</th> 
+            <th>{{sumFerroalloy}}</th> 
+            <th>{{sumAluminum}}</th> 
+            <th>{{sumMagnesium}}</th> 
+            <th>{{sumLead}}</th> 
+            <th>{{sumZinc}}</th> 
+            <th></th>
+            <th>{{sumOther}}</th>            
+        </tfoot>
+        </table>
+    </div>
+
+    <!--Table information for SubSector 2-->
+    <div class="tab-pane fade show active table200body" id="sector2Records"
+    *ngIf="showResults2" style="height: 250px;">            
+        <table class="table table-hover">
+        <thead class="table-borderless">
+            <tr class="text-center">
+            <th (click)="sortFunction('city', booleanSort)">City</th>
+            <th (click)="sortFunction('inventoryPeriod', booleanSort)">Period</th>
+            <th (click)="sortFunction('subSector', booleanSort)">Sub Sector</th>
+            <th (click)="sortFunction('scope', booleanSort)">Scope</th>
+            <th (click)="sortFunction('lubricants', booleanSort)">Lubricants<br>in Tons</th>
+            <th (click)="sortFunction('parafin', booleanSort)">Parafin<br>in Tons</th>
+            <th (click)="sortFunction('petroleum', booleanSort)">Petroleum<br>in Tons</th>
+            <th (click)="sortFunction('aromatics', booleanSort)">Aromatics<br>in Tons</th>
+            <th (click)="sortFunction('fluids', booleanSort)">Fluids<br>in Tons</th>
+            <th (click)="sortFunction('pfc', booleanSort)">PFC<br>in Tons</th>
+            <th (click)="sortFunction('hfc', booleanSort)">HFC<br>in Tons</th>
+            <th (click)="sortFunction('other2Description', booleanSort)">Other<br>Description</th>            
+            <th (click)="sortFunction('other2', booleanSort)">Other<br>in Tons</th>            
+            <th>
+                <div class="btn-group float-right">
+                    <button type="button" (click)="getallSector4Records(true)" class="btn btn-info">
+                    <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i><i *ngIf="!refreshing" class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let sectorRecord of filteredSector4Records">
+            <tr class="text-center">  
+                <th>{{sectorRecord?.city}}</th>
+                <th>{{sectorRecord?.inventoryPeriod.split(" ").pop()}}</th>   
+                <td >
+                    <ng-container *ngIf="sectorRecord.subSector == 'Industrial Production'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.subSector == 'Product Use'">
+                        2
+                    </ng-container>              
+                </td>
+                <td >                    
+                    1
+                </td>           
+                <td>{{sectorRecord?.lubricants}}</td> 
+                <td>{{sectorRecord?.parafin}}</td> 
+                <td>{{sectorRecord?.petroleum}}</td> 
+                <td>{{sectorRecord?.aromatics}}</td> 
+                <td>{{sectorRecord?.fluids}}</td> 
+                <td>{{sectorRecord?.pfc}}</td> 
+                <td>{{sectorRecord?.hfc}}</td> 
+                <td>{{sectorRecord?.other2Description}}</td>
+                <td>{{sectorRecord?.other2}}</td>                                  
+                <td class="">                    
+                    <button class="btn btn-outline-danger" (click)="onDeleteSector4(sectorRecord?.id)"><i class="fas fa-trash"></i></button>                    
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th>Totals in Tons</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{sumLubricants}}</th>
+            <th>{{sumParafin}}</th>
+            <th>{{sumPetroleum}}</th>
+            <th>{{sumAromatics}}</th>
+            <th>{{sumFluids}}</th>
+            <th>{{sumPfc}}</th>                                     
+            <th>{{sumHfc}}</th> 
+            <th></th> 
+            <th>{{sumOther2}}</th>             
+        </tfoot>
+        </table>
+    </div>
+</div>

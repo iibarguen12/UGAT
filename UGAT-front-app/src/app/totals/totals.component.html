@@ -1,0 +1,86 @@
+<section>     
+    <!--Header selectors-->
+    <div >
+        <div class="row"> 
+            <div class="center">
+                <div class="row">
+                    <div class="col-auto" style="width: 180px !important;">
+                        <label for="city">City</label>
+                        <select name="city" class="form-control" ngModel
+                        (ngModelChange)="onChangeCity($event)">
+                            <option value="All" selected>Select All</option>                
+                            <option *ngFor="let goverment of governmentsPerUser" [value]="goverment.cityName">
+                                {{goverment.cityName}}
+                            </option>   
+                        </select>                
+                    </div>
+                    <div class="col-auto" style="width: 180px !important;">
+                        <label for="inventoryPeriod">Inventory Period</label>
+                        <select name="inventoryPeriod" class="form-control" ngModel
+                        (ngModelChange)="onChangePeriod($event)">
+                            <option value="All" selected>Select All</option>                
+                            
+                            <option value="01.Jan - 31.Dec 2016">01.Jan - 31.Dec 2016</option>
+                            <option value="01.Jan - 31.Dec 2017">01.Jan - 31.Dec 2017</option>
+                            <option value="01.Jan - 31.Dec 2018">01.Jan - 31.Dec 2018</option>
+                            <option value="01.Jan - 31.Dec 2019">01.Jan - 31.Dec 2019</option>
+                            <option value="01.Jan - 31.Dec 2020">01.Jan - 31.Dec 2020</option>
+                            <option value="01.Jan - 31.Dec 2021">01.Jan - 31.Dec 2021</option>  
+                        </select>                
+                    </div> 
+                </div>
+            </div>       
+        </div>
+    </div>
+    <hr style="margin-bottom: 15px !important; margin-top: 15px !important;"/>
+    <!--Totals selectors-->
+    <div>
+        <div class="center tab-pane fade show active table200body" style="height: 250px; width: 500px;">            
+            <table class="table table-hover">
+                <thead class="table-borderless">
+                    <tr class="text-center">
+                        <th></th>
+                        <th >Stationary Energy</th>
+                        <th >Transportation</th>
+                        <th >Waste</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">  
+                        <th class="title">Scope 1</th>
+                        <th >{{totalSector1Scope1}}</th>
+                        <th >{{totalSector2Scope1}}</th>
+                        <th >{{totalSector3Scope1}}</th> 
+                    </tr>
+                    <tr class="text-center">  
+                        <th class="title">Scope 2</th>
+                        <th >{{totalSector1Scope2}}</th>
+                        <th >{{totalSector2Scope2}}</th>
+                        <th >{{totalSector3Scope2}}</th> 
+                    </tr>
+                    <tr class="text-center">  
+                        <th class="title">Scope 3</th>
+                        <th >{{totalSector1Scope3}}</th>
+                        <th >{{totalSector2Scope3}}</th>
+                        <th >{{totalSector3Scope3}}</th> 
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="title">Total in tCO2e</th>
+                        <th >{{totalSector1}}</th>
+                        <th >{{totalSector2}}</th>
+                        <th >{{totalSector3}}</th>
+                    </tr>
+                    <tr>
+                        <th class="title">Total Inventory</th>
+                        <th ></th>
+                        <th >{{totalAllSectors}}</th>
+                        <th ></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>    
+</section>
+

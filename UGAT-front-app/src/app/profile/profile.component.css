@@ -1,0 +1,16 @@
+@import "../../../node_modules/bulma/css/bulma.css";
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;    
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #1B4F72!important;
+}
+
+.eye-password{
+    color: gray;    
+}

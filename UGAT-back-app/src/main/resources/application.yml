@@ -1,0 +1,30 @@
+jwt:
+  secret: '[a-zA-Z0-9._]^+$Guidelines89797987forAlphabeticalArraNumeralsandOtherSymbo$'
+
+
+server:
+  ssl:
+    key-store: classpath:ghgcity_al.p12
+    key-store-password: UGAT_admin_1
+    key-store-type: pkcs12
+    key-alias: ghgcity_al
+    key-password: UGAT_admin_1
+  port: 8443
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/supportportal?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC #change this to your database url
+    password: root #SupportPortalP4$$
+    username: root #root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        check_nullability: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false

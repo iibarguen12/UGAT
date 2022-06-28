@@ -1,0 +1,61 @@
+version: "3.1"
+
+services:
+
+  ugat-db:
+    container_name: ugat-db
+    hostname: ugat-db
+    image: mysql:5.7
+    command: "--default-authentication-plugin=mysql_native_password"
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'supportportal'
+      MYSQL_USER: 'ugat'
+      MYSQL_PASSWORD: 'ugat'
+      MYSQL_ROOT_PASSWORD: 'root'
+    expose:
+      - "3306"
+    volumes:
+      - ugat-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+
+  ugat-back-end:
+    container_name: ugat-back-end
+    hostname: ugat-back-end
+    depends_on:
+      ugat-db:
+        condition: service_healthy
+    image: iibarguen12/ugat-back-app:2.0
+    expose:
+      - "8443"
+    ports:      
+      - 8443:8443
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://ugat-db:3306/supportportal?autoReconnect=true&useSSL=false"
+      SPRING_DATASOURCE_USERNAME: "ugat"
+      SPRING_DATASOURCE_PASSWORD: "ugat"
+      SPRING_JPA_HIBERNATE_DDL-AUTO: "update"
+      SPRING_JPA_SHOW-SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: "org.hibernate.dialect.MySQL8Dialect"
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+
+  ugat-front-end:
+    container_name: ugat-front-end
+    hostname: ugat-front-end
+    depends_on:
+      - ugat-back-end
+    image: iibarguen12/ugat-front-app:4.0
+    environment:
+      apiUrl: 'https://ghgcity.al:8443'
+    ports:      
+      - 443:443
+    volumes: 
+      - /etc/data/nginx/certs/:/etc/data/nginx/certs/  
+    restart: on-failure
+
+volumes:
+  ugat-mysql-data:  

@@ -1,0 +1,284 @@
+            
+<form #sectorForm="ngForm" class="box">  
+    
+    <!--Header selectors-->
+    <div class="row" style="height: 70px !important; overflow: auto;"> 
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="city">City</label>
+            <select id="city" name="city" required ngModel class="form-control"
+            (ngModelChange)="onChangeCity($event)">
+                <option *ngFor="let goverment of governmentsCities" [value]="goverment.cityName">
+                    {{goverment.cityName}}
+                </option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="inventoryPeriod">Inventory Period</label>
+            <select id="inventoryPeriod" name="inventoryPeriod" required ngModel class="form-control">
+                <option *ngFor="let period of periodsByCity" [value]="period.inventoryPeriod">
+                    {{period.inventoryPeriod}}
+                </option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="subSector">Sub Sector</label>
+            <select id="subSector" name="subSector" required ngModel class="form-control"
+            (ngModelChange)="onChangeSector($event)">
+                <option value="Livestock (Live units/Heads)">1-Livestock (Live units/Heads)</option>
+                <option value="Land Use Change">2-Land Use Change</option>
+                <option value="Other Aggregated sources">3-Other Aggregated sources</option>
+            </select>
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="scope">Scope</label>
+            <select id="scope" name="scope" required ngModel class="form-control"
+            (ngModelChange)="onChangeScope($event)">
+                <option *ngFor="let element of scopeElements" value="{{element.key}}">{{element.value}}</option>
+            </select>
+        </div>
+    </div>
+    <hr style="margin-bottom: 20px !important;"/>   
+    
+    <!--Sector 1 inputs-->         
+    <div class="row" style="height: 178px !important; overflow: auto;"
+    *ngIf="sector1AllInputs"> 
+        <div class="center">
+            <!--Sector 1 Row 1-->
+            <div class="row center">
+                <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">                        
+                    <label for="cows">Cows</label>
+                    <input type="number" min="0" step="100" name="cows" ngModel class="form-control" style=" width: 100px;">                                                                                                                        
+                </div>
+                
+                <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">
+                    <label for="buffaloes">Buffaloes</label>
+                    <input type="number" min="0" step="100" name="buffaloes" ngModel class="form-control" style=" width: 100px;">                                                                
+                </div>
+
+                <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">
+                    <label for="sheep">Sheep</label>
+                    <input type="number" min="0" step="100" name="sheep" ngModel class="form-control" style=" width: 100px;">                        
+                </div>                
+
+                <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">
+                    <label for="camel">Camel</label>
+                    <input type="number" min="0" step="100" name="camel" ngModel class="form-control" style=" width: 100px;">                                                
+                </div>                                      
+            </div>
+            <!--Sector 1 Row 2-->
+            <div class="row center">                    
+                <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">
+                    <label for="horses">Horses</label>
+                    <input type="number" min="0" step="100" name="horses" ngModel class="form-control" style=" width: 100px;">                        
+                </div>
+
+                <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">
+                    <label for="swine">Swine</label>
+                    <input type="number" min="0" step="100" name="swine" ngModel class="form-control" style=" width: 100px;">                        
+                </div>
+
+                <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">
+                    <label for="poultry">Poultry</label>
+                    <input type="number" min="0" step="100" name="poultry" ngModel class="form-control" style=" width: 100px;">                        
+                </div> 
+
+                <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">                        
+                    <label for="mulesAndAssess">Mules & Assess</label>
+                    <input type="number" min="0" step="100" name="mulesAndAssess" ngModel class="form-control" style=" width: 100px;">                                                                                                                       
+                </div>                                                              
+            </div>                        
+            <!--Sector 1 Row 3-->                               
+            <div class="row">
+                <div class="center">
+                    <div class="box col-auto marginleft10 marginright10" style="height: 100px !important; margin-bottom: 5px !important;">
+                        <label for="other">
+                            Other
+                            <input type="text" name="otherDescription" ngModel class="form-control otherInput">                                
+                        </label>                    
+                        <input type="number" min="0" step="100" name="other" ngModel class="form-control" style=" width: 100px;">                    
+                    </div>
+                </div>                                            
+            </div> 
+        </div>              
+    </div> 
+    
+    <!--Sector 2 inputs-->         
+    <div class="row" style="height: 200px !important; margin-top: -20px; "
+    *ngIf="sector2AllInputs"> 
+        <!--Sector 2 Row 1-->
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 190px  !important; margin-bottom: 5px !important;">                        
+                <label for="landEmission1">Land Emission 1</label>
+                <input type="number" min="0" step="100" name="landEmission1" ngModel class="form-control" style=" width: 200px;">                                                
+                
+                <label for="landEmission1Type">Type</label>
+                <select name="landEmission1Type" required ngModel class="form-control" style=" width: 200px ;">
+                    <option *ngFor="let element of landEmissionElements" value="{{element.key}}">{{element.value}}</option>
+                </select>
+
+                <label for="landEmission1Unit">Unit</label>                        
+                <select name="landEmission1Unit" ngModel class="form-control" style=" width: 200px ;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>
+            
+            <div class="box col-auto marginleft10 marginright10" style="height: 190px  !important; margin-bottom: 5px !important;">                        
+                <label for="landEmission2">Land Emission 2</label>
+                <input type="number" min="0" step="100" name="landEmission2" ngModel class="form-control" style=" width: 200px ;">                                                
+                
+                <label for="landEmission2Type">Type</label>
+                <select name="landEmission2Type" required ngModel class="form-control" style=" width: 200px ;">
+                    <option *ngFor="let element of landEmissionElements" value="{{element.key}}">{{element.value}}</option>
+                </select>
+
+                <label for="landEmission2Unit">Unit</label>                        
+                <select name="landEmission2Unit" ngModel class="form-control" style=" width: 200px ;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 190px  !important; margin-bottom: 5px !important;">                        
+                <label for="landEmission3">Land Emission 3</label>
+                <input type="number" min="0" step="100" name="landEmission3" ngModel class="form-control" style=" width: 200px ;">                                                
+                
+                <label for="landEmission3Type">Type</label>
+                <select name="landEmission3Type" required ngModel class="form-control" style=" width: 200px ;">
+                    <option *ngFor="let element of landEmissionElements" value="{{element.key}}">{{element.value}}</option>
+                </select>
+
+                <label for="landEmission3Unit">Unit</label>                        
+                <select name="landEmission3Unit" ngModel class="form-control" style=" width: 200px ;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>                                                   
+            
+        </div>                               
+    </div> 
+
+    <!--Sector 3 inputs-->         
+    <div class="row" style="height: 178px !important; overflow: auto;"
+    *ngIf="sector3AllInputs"> 
+        <!--Sector 3 Row 1-->
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="burning">Burning</label>
+                <input type="number" min="0" step="100" name="burning" ngModel class="form-control" style=" width: 100px;">                                                                        
+
+                <label for="burningUnit">Unit</label>                        
+                <select name="burningUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>
+            
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="burningForest">Burning in forest land</label>
+                <input type="number" min="0" step="100" name="burningForest" ngModel class="form-control" style=" width: 100px;">                                                                                                
+
+                <label for="burningForestUnit">Unit</label>                        
+                <select name="burningForestUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="burningGrass">Burning in Grassland</label>
+                <input type="number" min="0" step="100" name="burningGrass" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="burningGrassUnit">Unit</label>                        
+                <select name="burningGrassUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>                                                   
+            
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="burningCrop">Burning in Crop Land</label>
+                <input type="number" min="0" step="100" name="burningCrop" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="burningCropUnit">Unit</label>                        
+                <select name="burningCropUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div> 
+        </div>  
+        <!--Sector 3 Row 2-->
+        <div class="row center">
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="burningOther">Burning in Other Land</label>
+                <input type="number" min="0" step="100" name="burningOther" ngModel class="form-control" style=" width: 100px;">                                                                        
+
+                <label for="burningOtherUnit">Unit</label>                        
+                <select name="burningOtherUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>
+            
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="liming">Liming</label>
+                <input type="number" min="0" step="100" name="liming" ngModel class="form-control" style=" width: 100px;">                                                                                                
+
+                <label for="limingUnit">Unit</label>                        
+                <select name="limingUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>
+
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="urea">Urea fertilization</label>
+                <input type="number" min="0" step="100" name="urea" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="ureaUnit">Unit</label>                        
+                <select name="ureaUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div>                                                   
+            
+            <div class="box col-auto marginleft10 marginright10" style="height: 150px !important; margin-bottom: 5px !important;">                        
+                <label for="rice">Rice cultivation</label>
+                <input type="number" min="0" step="100" name="rice" ngModel class="form-control" style=" width: 100px;">                                                
+                
+                <label for="riceUnit">Unit</label>                        
+                <select name="riceUnit" ngModel class="form-control" style=" width: 100px;">
+                    <option value="Km2">Km2</option>
+                    <option value="Hectares">Hectares</option>
+                    <option value="Square Miles">Square Miles</option>
+                    <option value="Acre">Acre</option>                                                    
+                </select>                        
+            </div> 
+        </div>                              
+    </div> 
+
+    <hr style="margin-top: 0px !important;"/>          
+    <div class="field">                
+        <button type="button" (click)="onSubmit(sectorForm)" [disabled]="submitOff" class="btn btn-primary">Save changes</button>
+    </div>            
+</form>                          

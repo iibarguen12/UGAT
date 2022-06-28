@@ -1,0 +1,13 @@
+@import "../../../node_modules/bulma/css/bulma.css";
+
+.hero{
+    background-image: url('/assets/img/home/nature_energy.jpg') !important;
+    background-size: cover;
+    background-position: center center;
+    vertical-align: top;
+    background-color: white !important;
+}
+
+.hero-body{
+    max-height: 500px;
+}

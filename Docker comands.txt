@@ -1,0 +1,55 @@
+--Create images
+docker build -t ugat-front-app:1.0 .
+docker build -t ugat-back-app:1.0 .
+
+--Tag the images to push it in the reposiroty
+docker tag ugat-front-app:1.0 iibarguen12/ugat-front-app:1.0
+docker tag ugat-back-app:1.0 iibarguen12/ugat-back-app:1.0
+
+--Push the images in the reposiroty
+docker push iibarguen12/ugat-front-app:1.0
+docker push iibarguen12/ugat-back-app:1.0
+
+--Go inside Docker image:
+docker run -it ugat-front-app:4.0 sh
+
+--Upload SSH
+
+/* at the end was not necessary
+/usr/share/ugat
+
+docker exec -it ugat-front-end apk add bash
+
+docker exec -it ugat-front-end bash
+
+apk add python3 augeas gcc python3-dev musl-dev libffi-dev openssl-dev py3-pip
+
+apk --update --no-cache add python3 augeas gcc python3-dev musl-dev libffi-dev openssl-dev py3-pip
+
+cd /root/
+
+wget https://github.com/certbot/certbot/archive/v0.22.0.tar.gz
+
+tar -xzf ./v0.22.0.tar.gz
+
+cd certbot-0.22.0
+
+pip3 install --upgrade pip
+
+pip install ./
+
+cd /etc/nginx/conf.d
+
+apk add vim
+
+vim default.conf
+
+apk add certbot certbot-nginx
+
+certbot --ngnix -d ghgcity.al -d www.ghgcity.al
+
+apk update 
+*/
+
+--Create the certificate for Spring Boot app
+openssl pkcs12 -export -in ghgcity_al.crt -inkey ghgcity_al.key -out ghgcity_al.p12 -name ghgcity_al

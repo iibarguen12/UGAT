@@ -1,0 +1,13 @@
+@import "../../../node_modules/bulma/css/bulma.css";
+
+/*Styles for responsive navigation bar*/
+.toggle-nav-bar{
+    color:#000; 
+    font-size:20px;
+    margin-top: 15%;
+}
+
+.active{
+    color: #485fc7 !important;
+}
+

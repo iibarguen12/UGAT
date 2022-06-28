@@ -1,0 +1,35 @@
+@import "../../../node_modules/bulma/css/bulma.css";
+
+hr{
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+.form-control{
+    height: 1.5rem;
+    padding: 0px;
+    font-size: 13px;
+}
+
+.error {
+    color: red;
+    font-size: small;
+}
+
+.otherInput{
+    width: 85px;
+    float: right;
+    height: 20px;
+    margin-left: 5px;
+    border: none;
+    border-bottom: groove;
+    border-radius: unset;
+}
+
+.row{
+    margin-bottom: 10px !important;
+}
+
+.invisible{
+    color: transparent !important;
+}

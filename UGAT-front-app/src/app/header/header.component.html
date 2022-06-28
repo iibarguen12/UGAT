@@ -1,0 +1,101 @@
+<nav class="navbar navbar-expand-lg" role="navigation" aria-label="main navigation">
+  <div class="container-fluid">  
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/home">
+          <img src="../../assets/img/brand/UGAT_logo_small.png" >
+        </a>    
+      </div>
+      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon">
+            <i class="fas fa-bars toggle-nav-bar"></i>
+          </span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          
+          <a [ngClass]="isHeaderButton1Active ? 'active' : 'navbar-item nav-link'" (click)="isActive(1)">
+              <i class="fa fa-home"></i>
+              Home
+          </a>
+
+          <a [ngClass]="isHeaderButton2Active ? 'active' : 'navbar-item nav-link'" (click)="isActive(2)">
+              <i class="fa fa-users"></i>
+              Users
+            </a>
+
+          <a class="navbar-item nav-link" [class.active]="isHeaderButton3Active" (click)="isActive(3)">
+              <i class="fa fa-info"></i>
+              About
+          </a>
+
+          <a class="navbar-item nav-link" [class.active]="isHeaderButton4Active" (click)="isActive(4)">
+              <i class="fa fa-file"></i>
+              City Profiles
+          </a>
+
+          <a class="navbar-item nav-link" [class.active]="isHeaderButton5Active" (click)="isActive(5)">
+              <i class="fa fa-recycle"></i>
+              Sectors
+          </a>
+
+          <!-- Previous dropdown menu
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/sector">
+              <i class="fa fa-recycle"></i>
+              Sectors
+            </a>
+    
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                <i class="fa fa-building marginright5"></i>
+                  Stationary Energy
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                <i class="fa fa-car marginright5"></i>
+                  Transportation
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                <i class="fa fa-trash marginright5"></i>
+                  Waste
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                <i class="fa fa-cubes marginright5"></i>
+                  IPPU
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                <i class="fa fa-tree marginright5"></i>
+                  AFOLU
+              </a>
+            </div>
+          </div>
+          -->
+
+        </div>
+    
+        <div class="navbar-end">
+          <div class="navbar-item">
+          <a class="navbar-item"  [class.active]="isHeaderButton6Active" (click)="isActive(6)">
+              Welcome, {{user?.firstName}}
+              <i class="fa fa-user"></i>
+              </a>
+            <div class="buttons">            
+              <a class="button is-dark" (click)="onLogOut()" style="font-size: 13px;">
+                  <i class="fas fa-sign-in-alt ml-1"></i>
+                  Log out
+              </a>
+            </div>
+          </div>
+        </div>      
+    </div>
+    <script>
+      $(document).ready(function() {
+          $('a').click(function() {
+              alert('Hello');
+          });
+      });
+  </script>
+  </nav>

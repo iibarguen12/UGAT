@@ -1,0 +1,281 @@
+<div class="box">
+    <!--Header selectors-->
+    <div class="row" style="height: 70px !important; overflow: auto;"> 
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="city">City</label>
+            <select name="city" required [(ngModel)]="selectedCity" class="form-control"
+            (ngModelChange)="onChangeCity($event)">
+                <option value="All">Select All</option>                
+                <option *ngFor="let goverment of governmentsCities" [value]="goverment.cityName">
+                    {{goverment.cityName}}
+                </option>   
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="inventoryPeriod">Inventory Period</label>
+            <select name="inventoryPeriod" required [(ngModel)]="selectedInventoryPeriod" class="form-control"
+            (ngModelChange)="onChangePeriod($event)">
+                <option value="All">Select All</option>                
+                
+                <option value="01.Jan - 31.Dec 2016">01.Jan - 31.Dec 2016</option>
+                <option value="01.Jan - 31.Dec 2017">01.Jan - 31.Dec 2017</option>
+                <option value="01.Jan - 31.Dec 2018">01.Jan - 31.Dec 2018</option>
+                <option value="01.Jan - 31.Dec 2019">01.Jan - 31.Dec 2019</option>
+                <option value="01.Jan - 31.Dec 2020">01.Jan - 31.Dec 2020</option>
+                <option value="01.Jan - 31.Dec 2021">01.Jan - 31.Dec 2021</option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="subSector">Sub Sector</label>
+            <select id="subSector" name="subSector" required [(ngModel)]="selectedSubSector" class="form-control"
+            (ngModelChange)="onChangeSector($event)">                
+                <option value="Livestock (Live units/Heads)">1-Livestock (Live units/Heads)</option>
+                <option value="Land Use Change">2-Land Use Change</option>
+                <option value="Other Aggregated sources">3-Other Aggregated sources</option>
+            </select>
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="scope">Scope</label>
+            <select id="scope" name="scope" required [(ngModel)]="selectedScope" class="form-control"
+            (ngModelChange)="onChangeScope($event)">                  
+                <option value="Scope 1">Scope 1</option>
+            </select>
+        </div>
+    </div>
+    <hr style="margin-bottom: 5px !important;"/>
+
+    <!--Table information for SubSector 1-->
+    <div class="tab-pane fade show active table200body" id="sectorRecords"
+    *ngIf="showResults1" style="height: 250px;">            
+        <table class="table table-hover">
+        <thead class="table-borderless">
+            <tr class="text-center">
+            <th (click)="sortFunction('city', booleanSort)">City</th>
+            <th (click)="sortFunction('inventoryPeriod', booleanSort)">Period</th>
+            <th (click)="sortFunction('subSector', booleanSort)">Sub Sector</th>
+            <th (click)="sortFunction('scope', booleanSort)">Scope</th>
+            <th (click)="sortFunction('cows', booleanSort)">Cows</th>
+            <th (click)="sortFunction('buffaloes', booleanSort)">Buffaloes</th>
+            <th (click)="sortFunction('sheep', booleanSort)">Sheep</th>
+            <th (click)="sortFunction('camel', booleanSort)">Camel</th>
+            <th (click)="sortFunction('horses', booleanSort)">Horses</th>
+            <th (click)="sortFunction('swine', booleanSort)">Swine</th>
+            <th (click)="sortFunction('poultry', booleanSort)">Poultry</th>
+            <th (click)="sortFunction('mulesAndAssess', booleanSort)">Mules and<br>Assess</th>            
+            <th (click)="sortFunction('otherDescription', booleanSort)">Other<br>Description</th>        
+            <th (click)="sortFunction('other', booleanSort)">Other<br>Amount</th>            
+            <th>
+                <div class="btn-group float-right">
+                    <button type="button" (click)="getallSector5Records(true)" class="btn btn-info">
+                    <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i><i *ngIf="!refreshing" class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let sectorRecord of filteredSector5Records">
+            <tr class="text-center">  
+                <th>{{sectorRecord?.city}}</th>
+                <th>{{sectorRecord?.inventoryPeriod.split(" ").pop()}}</th>   
+                <td >
+                    <ng-container *ngIf="sectorRecord.subSector == 'Livestock (Live units/Heads)'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.subSector == 'Land Use Change'">
+                        2
+                    </ng-container>  
+                    <ng-container *ngIf="sectorRecord.subSector == 'Other Aggregated sources'">
+                        3
+                    </ng-container>             
+                </td>
+                <td >                    
+                    1
+                </td>
+                <td>{{sectorRecord?.cows}}</td>           
+                <td>{{sectorRecord?.buffaloes}}</td> 
+                <td>{{sectorRecord?.sheep}}</td> 
+                <td>{{sectorRecord?.camel}}</td> 
+                <td>{{sectorRecord?.horses}}</td> 
+                <td>{{sectorRecord?.swine}}</td> 
+                <td>{{sectorRecord?.poultry}}</td> 
+                <td>{{sectorRecord?.mulesAndAssess}}</td> 
+                <td>{{sectorRecord?.otherDescription}}</td> 
+                <td>{{sectorRecord?.other}}</td>                                                  
+                <td class="">                    
+                    <button class="btn btn-outline-danger" (click)="onDeleteSector5(sectorRecord?.id)"><i class="fas fa-trash"></i></button>                    
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th>Totals in Tons</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{sumCows}}</th>           
+            <th>{{sumBuffaloes}}</th> 
+            <th>{{sumSheep}}</th> 
+            <th>{{sumCamel}}</th> 
+            <th>{{sumHorses}}</th> 
+            <th>{{sumSwine}}</th> 
+            <th>{{sumPoultry}}</th> 
+            <th>{{sumMulesAndAssess}}</th> 
+            <th></th> 
+            <th>{{sumOther}}</th>             
+        </tfoot>
+        </table>
+    </div>
+
+    <!--Table information for SubSector 2-->
+    <div class="tab-pane fade show active table200body" id="sector2Records"
+    *ngIf="showResults2" style="height: 250px;">            
+        <table class="table table-hover">
+        <thead class="table-borderless">
+            <tr class="text-center">
+            <th (click)="sortFunction('city', booleanSort)">City</th>
+            <th (click)="sortFunction('inventoryPeriod', booleanSort)">Period</th>
+            <th (click)="sortFunction('subSector', booleanSort)">Sub Sector</th>
+            <th (click)="sortFunction('scope', booleanSort)">Scope</th>
+            <th (click)="sortFunction('landEmission1Type', booleanSort)">Land Emission 1<br>Type</th>
+            <th (click)="sortFunction('landEmission1Unit', booleanSort)">Land Emission 1<br>Unit</th>
+            <th (click)="sortFunction('landEmission1', booleanSort)">Land Emission 1<br>Amount</th>
+            <th (click)="sortFunction('landEmission2Type', booleanSort)">Land Emission 2<br>Type</th>
+            <th (click)="sortFunction('landEmission2Unit', booleanSort)">Land Emission 2<br>Unit</th>
+            <th (click)="sortFunction('landEmission2', booleanSort)">Land Emission 2<br>Amount</th>
+            <th (click)="sortFunction('landEmission3Type', booleanSort)">Land Emission 3<br>Type</th>
+            <th (click)="sortFunction('landEmission3Unit', booleanSort)">Land Emission 3<br>Unit</th>
+            <th (click)="sortFunction('landEmission3', booleanSort)">Land Emission 3<br>Amount</th>           
+            <th>
+                <div class="btn-group float-right">
+                    <button type="button" (click)="getallSector5Records(true)" class="btn btn-info">
+                    <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i><i *ngIf="!refreshing" class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let sectorRecord of filteredSector5Records">
+            <tr class="text-center">  
+                <th>{{sectorRecord?.city}}</th>
+                <th>{{sectorRecord?.inventoryPeriod.split(" ").pop()}}</th>   
+                <td >
+                    <ng-container *ngIf="sectorRecord.subSector == 'Livestock (Live units/Heads)'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.subSector == 'Land Use Change'">
+                        2
+                    </ng-container>  
+                    <ng-container *ngIf="sectorRecord.subSector == 'Other Aggregated sources'">
+                        3
+                    </ng-container>             
+                </td>
+                <td >                    
+                    1
+                </td>
+                <td>{{sectorRecord?.landEmission1Type}}</td>           
+                <td>{{sectorRecord?.landEmission1Unit}}</td> 
+                <td>{{sectorRecord?.landEmission1}}</td> 
+                <td>{{sectorRecord?.landEmission2Type}}</td>           
+                <td>{{sectorRecord?.landEmission2Unit}}</td> 
+                <td>{{sectorRecord?.landEmission2}}</td> 
+                <td>{{sectorRecord?.landEmission3Type}}</td>           
+                <td>{{sectorRecord?.landEmission3Unit}}</td> 
+                <td>{{sectorRecord?.landEmission3}}</td>                                                  
+                <td class="">                    
+                    <button class="btn btn-outline-danger" (click)="onDeleteSector5(sectorRecord?.id)"><i class="fas fa-trash"></i></button>                    
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th>Totals in Tons</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>           
+            <th></th> 
+            <th>{{sumLandEmission1}}</th> 
+            <th></th> 
+            <th></th> 
+            <th>{{sumLandEmission2}}</th> 
+            <th></th> 
+            <th></th> 
+            <th>{{sumLandEmission3}}</th>                       
+        </tfoot>
+        </table>
+    </div>
+
+    <!--Table information for SubSector 3-->
+    <div class="tab-pane fade show active table200body" id="sector3Records"
+    *ngIf="showResults3" style="height: 250px;">            
+        <table class="table table-hover">
+        <thead class="table-borderless">
+            <tr class="text-center">
+            <th (click)="sortFunction('city', booleanSort)">City</th>
+            <th (click)="sortFunction('inventoryPeriod', booleanSort)">Period</th>
+            <th (click)="sortFunction('subSector', booleanSort)">Sub Sector</th>
+            <th (click)="sortFunction('scope', booleanSort)">Scope</th>
+            <th (click)="sortFunction('burning', booleanSort)">Burning<br>in Tons</th>
+            <th (click)="sortFunction('burningForest', booleanSort)">Burning Forest<br>in Tons</th>
+            <th (click)="sortFunction('burningGrass', booleanSort)">Burning Grass<br>in Tons</th>
+            <th (click)="sortFunction('burningCrop', booleanSort)">Burning Crop<br>in Tons</th>
+            <th (click)="sortFunction('burningOther', booleanSort)">Burning Other<br>in Tons</th>
+            <th (click)="sortFunction('liming', booleanSort)">Liming<br>in Tons</th>
+            <th (click)="sortFunction('urea', booleanSort)">Urea<br>in Tons</th>           
+            <th (click)="sortFunction('rice', booleanSort)">Rice<br>in Tons</th>           
+            <th>
+                <div class="btn-group float-right">
+                    <button type="button" (click)="getallSector5Records(true)" class="btn btn-info">
+                    <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i><i *ngIf="!refreshing" class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let sectorRecord of filteredSector5Records">
+            <tr class="text-center">  
+                <th>{{sectorRecord?.city}}</th>
+                <th>{{sectorRecord?.inventoryPeriod.split(" ").pop()}}</th>   
+                <td >
+                    <ng-container *ngIf="sectorRecord.subSector == 'Livestock (Live units/Heads)'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.subSector == 'Land Use Change'">
+                        2
+                    </ng-container>  
+                    <ng-container *ngIf="sectorRecord.subSector == 'Other Aggregated sources'">
+                        3
+                    </ng-container>             
+                </td>
+                <td >                    
+                    1
+                </td>
+                <td>{{sectorRecord?.burning}}</td>           
+                <td>{{sectorRecord?.burningForest}}</td> 
+                <td>{{sectorRecord?.burningGrass}}</td> 
+                <td>{{sectorRecord?.burningCrop}}</td>           
+                <td>{{sectorRecord?.burningOther}}</td> 
+                <td>{{sectorRecord?.liming}}</td> 
+                <td>{{sectorRecord?.urea}}</td>           
+                <td>{{sectorRecord?.rice}}</td>                 
+                <td class="">                    
+                    <button class="btn btn-outline-danger" (click)="onDeleteSector5(sectorRecord?.id)"><i class="fas fa-trash"></i></button>                    
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th>Totals in Tons</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{sumBurning}}</th>           
+            <th>{{sumBurningForest}}</th> 
+            <th>{{sumBurningGrass}}</th>
+            <th>{{sumBurningCrop}}</th>            
+            <th>{{sumBurningOther}}</th>
+            <th>{{sumLiming}}</th>
+            <th>{{sumUrea}}</th>   
+            <th>{{sumRice}}</th>                     
+        </tfoot>
+        </table>
+    </div>
+
+</div>

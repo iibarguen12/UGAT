@@ -1,0 +1,87 @@
+export class Sector5AFOLU{
+  public city: string ;
+  public inventoryPeriod: string;
+  public subSector: string ;
+  public scope: string ;
+  public userName: string ;
+  public cows: number;
+  public buffaloes: number;
+  public sheep: number;
+  public camel: number;
+  public horses: number;
+  public swine: number;
+  public poultry: number;
+  public mulesAndAssess: number;
+  public other: number;
+  public otherDescription: string;
+  public landEmission1: number;
+  public landEmission1Type: string;
+  public landEmission1Unit: string;
+  public landEmission2: number;
+  public landEmission2Type: string;
+  public landEmission2Unit: string;
+  public landEmission3: number;
+  public landEmission3Type: string;
+  public landEmission3Unit: string;
+  public burning: number;
+  public burningUnit: string;
+  public burningForest: number;
+  public burningForestUnit: string;
+  public burningGrass: number;
+  public burningGrassUnit: string;
+  public burningCrop: number;
+  public burningCropUnit: string;
+  public burningOther: number;
+  public burningOtherUnit: string;
+  public liming: number;
+  public limingUnit: string;
+  public urea: number;
+  public ureaUnit: string;
+  public rice: number;
+  public riceUnit: string;
+
+  
+    
+  constructor() {
+    this.city = null;
+    this.inventoryPeriod = null;
+    this.subSector = null;
+    this.scope = null;
+    this.userName = null;
+    this.cows = null;
+    this.buffaloes = null;
+    this.sheep = null;
+    this.camel = null;
+    this.horses = null;
+    this.swine = null;
+    this.poultry = null;
+    this.mulesAndAssess = null;
+    this.other = null;
+    this.otherDescription = null;
+    this.landEmission1 = null;
+    this.landEmission1Type = null;
+    this.landEmission1Unit = null;
+    this.landEmission2 = null;
+    this.landEmission2Type = null;
+    this.landEmission2Unit = null;
+    this.landEmission3 = null;
+    this.landEmission3Type = null;
+    this.landEmission3Unit = null;
+    this.burning = null;
+    this.burningUnit = null;
+    this.burningForest = null;
+    this.burningForestUnit = null;
+    this.burningGrass = null;
+    this.burningGrassUnit = null;
+    this.burningCrop = null;
+    this.burningCropUnit = null;
+    this.burningOther = null;
+    this.burningOtherUnit = null;
+    this.liming = null;
+    this.limingUnit = null;
+    this.urea = null;
+    this.ureaUnit = null;
+    this.rice = null;
+    this.riceUnit = null;   
+  }
+}

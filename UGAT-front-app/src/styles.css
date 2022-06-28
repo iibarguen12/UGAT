@@ -1,0 +1,178 @@
+/* Global linked styles */
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css';
+@import 'https://use.fontawesome.com/releases/v5.8.1/css/all.css';
+@import "~angular-notifier/styles";
+
+/**Min window styles*/
+@media only screen and (max-width: 800px) {
+  body {  overflow-y: scroll !important;}
+}
+
+/*Normal window styles*/
+td {
+  cursor: pointer;
+}
+.move-right {
+    position: absolute;
+    right: 0;
+  }
+
+  .move-left {
+    position: absolute;
+    left: 0;
+  }
+
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+  }
+
+html, body { height: 100%; overflow-y: hidden}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+thead{ font-size: 13px}
+
+tbody{ font-size: 12px !important;}
+
+li b{ font-size: 12px}
+
+li {font-size: 11px}
+
+thead th{
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 11px;
+  background-color: aliceblue;
+  color: gray !important;  
+  position: -webkit-sticky; /* this is for all Safari (Desktop & iOS), not for Chrome */
+  position: sticky;
+  top: 0;
+  z-index: 1; /* any positive value, layer order is global */
+}
+
+tbody td{  
+  font-size: 11px !important;
+}
+
+
+tfoot th{  
+  font-size: 13px !important;
+  cursor: auto !important;
+  text-align: center !important;
+  font-weight: normal;
+  color: darkred !important;
+}
+
+.table500header{
+  width: 100%;
+  text-align-last: right;
+}
+
+.table500body{
+  height: 470px;
+  overflow: scroll;
+  width: 100%;
+}
+
+.table200body{
+  height: 170px;
+  overflow: scroll;
+  width: 100%;
+}
+
+label, span, button{ font-size: 12px !important;}
+
+input, select{ font-size: 11px !important;}
+
+.table td, .table th{
+  vertical-align: middle;
+}
+
+::-webkit-scrollbar{
+  background: transparent;  
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background: lightgray;
+  border-radius: 10px;
+  height: 50px;
+}
+
+.center{
+  margin: auto !important;
+}
+
+.box300{
+  height: 300px;
+  overflow: auto;
+}
+
+.box350{
+  height: 350px;
+  overflow: auto;
+}
+
+.box400{
+  height: 400px;
+  overflow: auto;
+}
+
+.box450{
+  height: 450px;
+  overflow: auto;
+}
+
+.box500{
+  height: 500px;
+  overflow: auto;
+}
+
+.marginbottom10{
+  margin-bottom: 10px !important;
+}
+
+.marginleft2{
+  margin-left: 2px !important;
+}
+
+.marginleft5{
+  margin-left: 5px !important;
+}
+
+.marginleft10{
+  margin-left: 10px !important;
+}
+
+.marginright2{
+  margin-right: 2px !important;
+}
+
+.marginright5{
+  margin-right: 5px !important;
+}
+
+.marginright10{
+  margin-right: 10px !important;
+}
+
+.modal-backdrop{
+  z-index: 0 !important;
+}

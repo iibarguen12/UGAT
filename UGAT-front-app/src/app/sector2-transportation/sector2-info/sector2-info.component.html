@@ -1,0 +1,139 @@
+<div class="box">
+    <!--Header selectors-->
+    <div class="row" style="height: 70px !important; overflow: auto;"> 
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="city">City</label>
+            <select name="city" required [(ngModel)]="selectedCity" class="form-control"
+            (ngModelChange)="onChangeCity($event)">
+                <option value="All">Select All</option>                
+                <option *ngFor="let goverment of governmentsCities" [value]="goverment.cityName">
+                    {{goverment.cityName}}
+                </option>   
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="inventoryPeriod">Inventory Period</label>
+            <select name="inventoryPeriod" required [(ngModel)]="selectedInventoryPeriod" class="form-control"
+            (ngModelChange)="onChangePeriod($event)">
+                <option value="All">Select All</option>                
+                
+                <option value="01.Jan - 31.Dec 2016">01.Jan - 31.Dec 2016</option>
+                <option value="01.Jan - 31.Dec 2017">01.Jan - 31.Dec 2017</option>
+                <option value="01.Jan - 31.Dec 2018">01.Jan - 31.Dec 2018</option>
+                <option value="01.Jan - 31.Dec 2019">01.Jan - 31.Dec 2019</option>
+                <option value="01.Jan - 31.Dec 2020">01.Jan - 31.Dec 2020</option>
+                <option value="01.Jan - 31.Dec 2021">01.Jan - 31.Dec 2021</option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="subSector">Sub Sector</label>
+            <select id="subSector" name="subSector" required [(ngModel)]="selectedSubSector" class="form-control"
+            (ngModelChange)="onChangeSector($event)">
+                <option value="All">Select All</option>    
+                <option value="On road">1-On road</option>
+                <option value="Railways">2-Railways</option>
+                <option value="Waterborne Navigation">3-Waterborne Navigation</option>
+                <option value="Aviation">4-Aviation</option>
+                <option value="Off Road">5-Off Road</option>
+            </select>
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="scope">Scope</label>
+            <select id="scope" name="scope" required [(ngModel)]="selectedScope" class="form-control"
+            (ngModelChange)="onChangeScope($event)">
+                <option value="All">Select All</option>    
+                <option *ngFor="let element of scopeElements" value="{{element.key}}">{{element.value}}</option>
+            </select>
+        </div>
+    </div>
+    <hr style="margin-bottom: 5px !important;"/>
+
+    <!--Table information-->
+    <div class="tab-pane fade show active table200body" id="sector2Records"
+    *ngIf="showResults" style="height: 250px;">            
+        <table class="table table-hover">
+        <thead class="table-borderless">
+            <tr class="text-center">
+            <th (click)="sortFunction('city', booleanSort)">City</th>
+            <th (click)="sortFunction('inventoryPeriod', booleanSort)">Period</th>
+            <th (click)="sortFunction('subSector', booleanSort)">Sub Sector</th>
+            <th (click)="sortFunction('scope', booleanSort)">Scope</th>
+            <th (click)="sortFunction('diesel', booleanSort)">Diesel<br>in tCO2e</th>            
+            <th (click)="sortFunction('gasoline', booleanSort)">Gasoline<br>in tCO2e</th>            
+            <th (click)="sortFunction('naturalGas', booleanSort)">NaturalGas<br>in tCO2e</th>            
+            <th (click)="sortFunction('lgn', booleanSort)">LGN<br>in tCO2e</th>            
+            <th (click)="sortFunction('propane', booleanSort)">Propane<br>in tCO2e</th>            
+            <th (click)="sortFunction('electricity', booleanSort)">Electricity<br>in tCO2e</th>            
+            <th (click)="sortFunction('otherDescription', booleanSort)">Other<br>Description</th>
+            <th (click)="sortFunction('other', booleanSort)">Other<br>in tCO2e</th>            
+            <th>
+                <div class="btn-group float-right">
+                    <button type="button" (click)="getallSector2Records(true)" class="btn btn-info">
+                    <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i><i *ngIf="!refreshing" class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let sector2Record of filteredSector2Records">
+            <tr class="text-center">  
+                <th>{{sector2Record?.city}}</th>
+                <th>{{sector2Record?.inventoryPeriod.split(" ").pop()}}</th>   
+                <td >
+                    <ng-container *ngIf="sector2Record.subSector == 'On road'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sector2Record.subSector == 'Railways'">
+                        2
+                    </ng-container>
+                    <ng-container *ngIf="sector2Record.subSector == 'Waterborne Navigation'">
+                        3
+                    </ng-container>
+                    <ng-container *ngIf="sector2Record.subSector == 'Aviation'">
+                        4
+                    </ng-container>
+                    <ng-container *ngIf="sector2Record.subSector == 'Off Road'">
+                        5
+                    </ng-container>                  
+                </td>
+                <td >                    
+                    <ng-container *ngIf="sector2Record.scope == 'Fossil fuel purchased and used by vehicles inside city boundaries'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sector2Record.scope == 'Electricity purchased for e-vehicles'">
+                        2
+                    </ng-container>
+                    <ng-container *ngIf="sector2Record.scope == 'Volume of fuel purchased in the city but utilized by vehicles outside of city boundaries'">
+                        3
+                    </ng-container>
+                </td>           
+                <td>{{sector2Record?.diesel}}</td>                
+                <td>{{sector2Record?.gasoline}}</td>                
+                <td>{{sector2Record?.naturalGas}}</td>                
+                <td>{{sector2Record?.lgn}}</td>                
+                <td>{{sector2Record?.propane}}</td>                
+                <td>{{sector2Record?.electricity}}</td>                
+                <td>{{sector2Record?.otherDescription}}</td>
+                <td>{{sector2Record?.other}}</td>                
+                <td class="">                    
+                    <button class="btn btn-outline-danger" (click)="onDeleteSector2(sector2Record?.id)"><i class="fas fa-trash"></i></button>                    
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th>Totals in tCO2e</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{sumDiesel}}</th>
+            <th>{{sumGasoline}}</th>
+            <th>{{sumNaturalGas}}</th>
+            <th>{{sumLgn}}</th>
+            <th>{{sumPropane}}</th>
+            <th>{{sumElectricity}}</th>                         
+            <th></th>
+            <th>{{sumOther}}</th> 
+        </tfoot>
+        </table>
+    </div>
+</div>

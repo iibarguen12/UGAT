@@ -1,0 +1,9 @@
+@import "../../../node_modules/bulma/css/bulma.css";
+
+.tabs{
+    font-size: 13px !important;
+}
+
+.width80{
+    width: 80% !important;
+}

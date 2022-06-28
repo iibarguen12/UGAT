@@ -1,0 +1,129 @@
+<div class="box">
+    <!--Header selectors-->
+    <div class="row" style="height: 70px !important; overflow: auto;"> 
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="city">City</label>
+            <select name="city" required [(ngModel)]="selectedCity" class="form-control"
+            (ngModelChange)="onChangeCity($event)">
+                <option value="All">Select All</option>                
+                <option *ngFor="let goverment of governmentsCities" [value]="goverment.cityName">
+                    {{goverment.cityName}}
+                </option>   
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 180px !important;">
+            <label for="inventoryPeriod">Inventory Period</label>
+            <select name="inventoryPeriod" required [(ngModel)]="selectedInventoryPeriod" class="form-control"
+            (ngModelChange)="onChangePeriod($event)">
+                <option value="All">Select All</option>                
+                
+                <option value="01.Jan - 31.Dec 2016">01.Jan - 31.Dec 2016</option>
+                <option value="01.Jan - 31.Dec 2017">01.Jan - 31.Dec 2017</option>
+                <option value="01.Jan - 31.Dec 2018">01.Jan - 31.Dec 2018</option>
+                <option value="01.Jan - 31.Dec 2019">01.Jan - 31.Dec 2019</option>
+                <option value="01.Jan - 31.Dec 2020">01.Jan - 31.Dec 2020</option>
+                <option value="01.Jan - 31.Dec 2021">01.Jan - 31.Dec 2021</option>  
+            </select>                
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="subSector">Sub Sector</label>
+            <select id="subSector" name="subSector" required [(ngModel)]="selectedSubSector" class="form-control"
+            (ngModelChange)="onChangeSector($event)">
+                <option value="All">Select All</option>
+                <option value="Landfill">1-Landfill</option>
+                <option value="Incineration">2-Incineration</option>
+                <option value="Mechanical Biological treatment">3-Mechanical Biological treatment</option>
+                <option value="Waste Water">4-Waste Water</option>
+            </select>
+        </div>
+        <div class="col-auto" style="width: 300px !important;">
+            <label for="scope">Scope</label>
+            <select id="scope" name="scope" required [(ngModel)]="selectedScope" class="form-control"
+            (ngModelChange)="onChangeScope($event)">
+                <option value="All">Select All</option>    
+                <option *ngFor="let element of scopeElements" value="{{element.key}}">{{element.value}}</option>
+            </select>
+        </div>
+    </div>
+    <hr style="margin-bottom: 5px !important;"/>
+
+    <!--Table information-->
+    <div class="tab-pane fade show active table200body" id="sectorRecords"
+    *ngIf="showResults" style="height: 250px;">            
+        <table class="table table-hover">
+        <thead class="table-borderless">
+            <tr class="text-center">
+            <th (click)="sortFunction('city', booleanSort)">City</th>
+            <th (click)="sortFunction('inventoryPeriod', booleanSort)">Period</th>
+            <th (click)="sortFunction('subSector', booleanSort)">Sub Sector</th>
+            <th (click)="sortFunction('scope', booleanSort)">Scope</th>
+            <th (click)="sortFunction('organic', booleanSort)">Organic fraction<br>in tCO2e</th>            
+            <th (click)="sortFunction('paper', booleanSort)">Paper<br>in tCO2e</th>            
+            <th (click)="sortFunction('plastic', booleanSort)">Plastic<br>in tCO2e</th>            
+            <th (click)="sortFunction('glass', booleanSort)">Glass<br>in tCO2e</th>            
+            <th (click)="sortFunction('gardening', booleanSort)">Gardening waste<br>in tCO2e</th>            
+            <th (click)="sortFunction('inert', booleanSort)">Inert Material<br>in tCO2e</th>                        
+            <th (click)="sortFunction('water', booleanSort)">Water waste<br>in tCO2e</th>            
+            <th>
+                <div class="btn-group float-right">
+                    <button type="button" (click)="getallSector3Records(true)" class="btn btn-info">
+                    <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i><i *ngIf="!refreshing" class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let sectorRecord of filteredSector3Records">
+            <tr class="text-center">  
+                <th>{{sectorRecord?.city}}</th>
+                <th>{{sectorRecord?.inventoryPeriod.split(" ").pop()}}</th>   
+                <td >
+                    <ng-container *ngIf="sectorRecord.subSector == 'Landfill'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.subSector == 'Incineration'">
+                        2
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.subSector == 'Mechanical Biological treatment'">
+                        3
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.subSector == 'Waste Water'">
+                        4
+                    </ng-container>               
+                </td>
+                <td >                    
+                    <ng-container *ngIf="sectorRecord.scope == 'Waste generated inside the city and treated inside the city'">
+                        1
+                    </ng-container>
+                    <ng-container *ngIf="sectorRecord.scope == 'Waste generated inside the city and treated outside the city'">
+                        3
+                    </ng-container>
+                </td>           
+                <td>{{sectorRecord?.organic}}</td>                
+                <td>{{sectorRecord?.paper}}</td>                
+                <td>{{sectorRecord?.plastic}}</td>                
+                <td>{{sectorRecord?.glass}}</td>                
+                <td>{{sectorRecord?.gardening}}</td>                
+                <td>{{sectorRecord?.inert}}</td>                                
+                <td>{{sectorRecord?.water}}</td>                
+                <td class="">                    
+                    <button class="btn btn-outline-danger" (click)="onDeleteSector3(sectorRecord?.id)"><i class="fas fa-trash"></i></button>                    
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th>Totals in tCO2e</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{sumOrganic}}</th>
+            <th>{{sumPaper}}</th>
+            <th>{{sumPlastic}}</th>
+            <th>{{sumGlass}}</th>
+            <th>{{sumGardening}}</th>
+            <th>{{sumInert}}</th>                                     
+            <th>{{sumWater}}</th> 
+        </tfoot>
+        </table>
+    </div>
+</div>
